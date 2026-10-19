@@ -53,24 +53,41 @@ public class BillModel {
     }
 
     public boolean validateCredentials(String username, String password) {
-        if (username == null || username.trim().isEmpty() || password == null || password.trim().isEmpty()) {
+        if (username == null || username.trim().isEmpty()
+                || password == null || password.trim().isEmpty()) {
             authMessage = "Please enter both username and password.";
             return false;
         }
 
         if (!userDatabase.containsKey(username)) {
-            userDatabase.put(username, password);
-            authMessage = "New account registered successfully!";
-            return true;
-        } else {
-            if (userDatabase.get(username).equals(password)) {
-                authMessage = "";
-                return true;
-            } else {
-                authMessage = "Wrong password. Please try again.";
-                return false;
-            }
+            authMessage = "Account not found. Please register first.";
+            return false;
         }
+
+        if (userDatabase.get(username).equals(password)) {
+            authMessage = "";
+            return true;
+        }
+
+        authMessage = "Wrong password. Please try again.";
+        return false;
+    }
+
+    public boolean registerUser(String username, String password) {
+        if (username == null || username.trim().isEmpty()
+                || password == null || password.trim().isEmpty()) {
+            authMessage = "Please enter both username and password.";
+            return false;
+        }
+
+        if (userDatabase.containsKey(username)) {
+            authMessage = "Username already taken.";
+            return false;
+        }
+
+        userDatabase.put(username, password);
+        authMessage = "Account registered! You can now log in.";
+        return true;
     }
 
     public BillRecord createBill(String guestName, String roomType, int nights, double extras, double amountPaid) {

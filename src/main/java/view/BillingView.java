@@ -16,6 +16,7 @@ public class BillingView {
     private TextField userField;
     private PasswordField passField;
     private Button loginButton;
+    private Button registerButton;
     private Label errorLabel;
 
     private TextField guestNameField;
@@ -49,7 +50,7 @@ public class BillingView {
         Label titleLabel = new Label("Lodge Billing Lab");
         titleLabel.setStyle("-fx-text-fill: #FFD700; -fx-font-size: 26px; -fx-font-weight: bold;");
 
-        Label subtitleLabel = new Label("Login (New accounts register automatically)");
+        Label subtitleLabel = new Label("Login (Login to your account)");
         subtitleLabel.setStyle("-fx-text-fill: #A0AEC0; -fx-font-size: 13px;");
 
         userField = new TextField();
@@ -62,14 +63,17 @@ public class BillingView {
         passField.setMaxWidth(250);
         passField.setStyle("-fx-background-color: #172A45; -fx-text-fill: white; -fx-prompt-text-fill: #718096; -fx-border-color: #FFD700; -fx-border-radius: 4;");
 
-        loginButton = new Button("Login / Register");
+        loginButton = new Button("Login");
         loginButton.setMinWidth(250);
         loginButton.setStyle("-fx-background-color: #FFD700; -fx-text-fill: #0A192F; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-radius: 4;");
+
+        registerButton = new Button("Register");
+        registerButton.setStyle("-fx-background-color: transparent; -fx-text-fill: #A0AEC0; -fx-font-size: 12px; -fx-underline: true; -fx-cursor: hand;");
 
         errorLabel = new Label();
         errorLabel.setStyle("-fx-text-fill: #E53E3E;");
 
-        loginLayout.getChildren().addAll(titleLabel, subtitleLabel, userField, passField, loginButton, errorLabel);
+        loginLayout.getChildren().addAll(titleLabel, subtitleLabel, userField, passField, loginButton, registerButton, errorLabel);
         Scene loginScene = new Scene(loginLayout, 500, 400);
         stage.setScene(loginScene);
         stage.setTitle("Login - Lodge Billing System");
@@ -235,6 +239,7 @@ public class BillingView {
     }
 
     public Button getLoginButton() { return loginButton; }
+    public Button getRegisterButton() { return registerButton; }
     public TextField getUserField() { return userField; }
     public PasswordField getPassField() { return passField; }
     public Label getErrorLabel() { return errorLabel; }

@@ -23,6 +23,9 @@ public class BillingController {
         if (view.getLoginButton() != null) {
             view.getLoginButton().setOnAction(e -> handleLogin());
         }
+        if (view.getRegisterButton() != null) {
+            view.getRegisterButton().setOnAction(e -> handleRegister());
+        }
     }
 
     private void handleLogin() {
@@ -35,6 +38,14 @@ public class BillingController {
         } else {
             view.getErrorLabel().setText(model.getAuthMessage());
         }
+    }
+
+    private void handleRegister() {
+        String username = view.getUserField().getText();
+        String password = view.getPassField().getText();
+
+        model.registerUser(username, password);
+        view.getErrorLabel().setText(model.getAuthMessage());
     }
 
     private void bindDashboardActions() {
